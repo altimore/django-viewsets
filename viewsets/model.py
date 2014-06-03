@@ -51,8 +51,7 @@ class ModelViewSet(ViewSet):
     def __init__(self, model=None, base_url_pattern=None, base_url_name=None,
                  id_pattern=None, excluded_views=None,
                  main_view=None, main_url=None, namespace=None):
-        # Initializes parent class.
-        super(ModelViewSet, self).__init__()
+
         # Initializes object attributes with `__init__` kwargs.
         if model is not None:
             self.model = model
@@ -71,6 +70,10 @@ class ModelViewSet(ViewSet):
             self.main_url = main_url
         if namespace is not None:
             self.namespace = namespace
+            
+        # Initializes parent class after the excluded views 
+        # TODO: make a function exclude_views(self) in the parent and call it in the init
+        super(ModelViewSet, self).__init__()
 
         # Replaces `PLACEHOLDER_PATTERN` with `id_pattern` in every view.
         for view_dict in self.views.values():
